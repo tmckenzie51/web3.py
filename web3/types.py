@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 from typing import (
     TYPE_CHECKING,
     Any,
@@ -38,6 +40,25 @@ from web3.datastructures import (
 if TYPE_CHECKING:
     from web3 import Web3  # noqa: F401
 
+JSON = Union[Dict[Any, Any], str, int, List[Any]]
+
+class RPCRequest(TypedDict, total=False):
+    jsonrpc: str
+    method: str
+    params: List[Any]
+    id: int
+
+
+class RPCResponse(TypedDict, total=False):
+    id: int
+    jsonrpc: str
+    result: JSON
+    error: str
+
+class RPCHandlerAPI(ABC):
+    @abstractmethod
+    async def __call__(self, request: RPCRequest) -> RPCResponse:
+        ...
 
 TReturn = TypeVar("TReturn")
 TParams = TypeVar("TParams")

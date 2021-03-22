@@ -5,6 +5,12 @@ from web3.types import (
     BlockData,
 )
 
+class DecodingError(Exception):
+    """
+    Raised when a datagram could not be decoded.
+    """
+
+    pass
 
 class BadFunctionCallOutput(Exception):
     """
