@@ -3,6 +3,9 @@ import warnings
 
 import pkg_resources
 
+from web3.tools.rpc_server import(
+    RPCServer
+)
 from eth_account import (
     Account  # noqa: E402,
 )
