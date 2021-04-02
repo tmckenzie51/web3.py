@@ -15,6 +15,14 @@ from web3.exceptions import DecodingError
 
 NEW_LINE = "\n"
 
+def generate_error_response(request: RPCRequest, error: str) -> RPCResponse:
+    response = RPCResponse(
+        id=request.get("id", -1),
+        jsonrpc=request.get("jsonrpc", "2.0"),
+        error=str(error),
+    )
+    return response
+    
 class UnknownMethodHandler():
     async def __call__(self, request):
         return generate_error_response(
@@ -81,6 +89,7 @@ class RPCServer(Service):
 
         handler = self._handlers.get(method, fallback_handler)
         try:
+            breakpoint()
             response =  handler(request)
         except Exception as err:
             self.logger.error("Error handling request: %s  error: %s", request, err)
