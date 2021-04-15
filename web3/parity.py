@@ -134,7 +134,7 @@ class Parity(ModuleV2):
             block_identifier = self.default_block
         return (address, quantity, hash_, block_identifier)
 
-    listStorageKeys: Method[Callable[..., List[Hash32]]] = Method(
+    list_storage_keys: Method[Callable[..., List[Hash32]]] = Method(
         RPC.parity_listStorageKeys,
         mungers=[list_storage_keys_munger],
     )
@@ -224,3 +224,4 @@ class Parity(ModuleV2):
     traceReplayTransaction = DeprecatedMethod(trace_replay_transaction, 'traceReplayTransaction',
                                               'trace_replay_transaction')
     netPeers = DeprecatedMethod(net_peers, 'netPeers', 'net_peers')
+    listStorageKeys = DeprecatedMethod(list_storage_keys, 'listStorageKeys', 'list_storage_keys')
